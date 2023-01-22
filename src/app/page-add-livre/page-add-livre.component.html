@@ -1,0 +1,136 @@
+<div class="container my-container">
+    <div class="card justify-content-md-center">
+        <div class="card-header text-center">
+            <br>
+            <h2>Ajouter un livre</h2>
+        </div>
+       
+        <div class="card-body">
+            <form  #bookForm="ngForm"  (ngSubmit)="addBook(bookForm)" enctype="multipart/form-data">
+            <div class="row">
+            
+            <div class="col-6">
+            
+                
+                <div class="mb-3">
+                    <input type="text" [(ngModel)]="livre.titre"
+                    name="titre" #livre.titre="ngModel"
+                    id="titre" class="form-control" placeholder="Titre">
+                    <div class="invalid-feedback">Le champs titre est requis</div>
+                </div>
+                <div class="mb-3">
+                    <input type="text" [(ngModel)]="livre.resume"
+                    name="resume" #livre.resume="ngModel"
+                    id="resume"class="form-control" placeholder="Résume">
+                    <div class="invalid-feedback">Le champs resume est requis</div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                    <input type="text" [(ngModel)]="livre.auteurs[0].nom"
+                    name="nomauteur" #livre.auteurs[0].nom="ngModel"
+                    id="nomauteur" class="form-control" placeholder="Nom Auteur 1">
+                    <div class="invalid-feedback">Un nom d'Auteur est requis</div>
+                        </div>
+                        <div class="col-md-6">
+                    <input type="text" [(ngModel)]="livre.auteurs[0].prenom"
+                    name="prenomauteur" #livre.auteurs[0].prenom="ngModel"
+                    id="nomauteur" class="form-control" placeholder="Prénom Auteur 1">
+                    <div class="invalid-feedback">Un prénom d'auteur est requis</div>
+                        </div>
+                </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                    <input type="text" [(ngModel)]="livre.auteurs[1].nom"
+                    name="nomauteur2" #livre.auteurs[1].nom="ngModel"
+                    id="nomauteur2" class="form-control" placeholder="Nom Auteur 2">
+                    <div class="invalid-feedback">Un nom d'Auteur est requis</div>
+                        </div>
+                        <div class="col-md-6">
+                    <input type="text" [(ngModel)]="livre.auteurs[1].prenom"
+                    name="prenomauteur2" #livre.auteurs[1].prenom="ngModel"
+                    id="nomauteur2" class="form-control" placeholder="Prénom auteur 2">
+                    <div class="invalid-feedback">Un prénom d'auteur est requis</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input type="text" [(ngModel)]="livre.edition[0].nom"
+                    name="edition" #livre.edition[0].nom="ngModel"
+                    id="edition" class="form-control" placeholder="Edition">
+                    <div class="invalid-feedback">L'edition est requis</div>
+                </div>
+                <div class="mb-3">
+                    <input type="number" [(ngModel)]="livre.edition[0].isbn"
+                    name="isbn" #livre.edition[0].isbn="ngModel"
+                    id="isbn" class="form-control" placeholder="N° isbn">
+                    <div class="invalid-feedback">L'isbn est requis</div>
+                </div>
+                <div class="mb-3">
+                    <input type="text" [(ngModel)]="livre.edition[0].editeur.nomEditeur"
+                    name="editeur" #livre.edition[0].editeur.nomEditeur="ngModel"
+                    id="editeur" class="form-control" placeholder="Editeur">
+                    <div class="invalid-feedback">L'éditeur est requis</div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                    <mat-form-field>
+                        <mat-label>Selectionner la langue</mat-label>
+                        <mat-select [(value)]="livre.edition[0].langue" [(ngModel)]="livre.edition[0].langue">
+                          <mat-option value="Français">Français</mat-option>
+                          <mat-option value="Anglais">Anglais</mat-option>
+                          <mat-option value="Allemand">Allemand</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                    <mat-form-field>
+                        <input [(ngModel)]="livre.edition[0].dateParution"
+                        name="dateParution" #livre.edition[0].dateParution="ngModel"
+                        id="dateParution"
+                         matInput [matDatepicker]="picker" placeholder="Choisir la date de parution">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                            </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-6">
+                <div class="dropzone" appDrag (files)="fileDropped($event)">
+                    <div class="text-wrapper">
+                        Drag and drop your file or <a class="browse-button" (click)="selectfile.click()">browse</a> a file
+                    </div>
+                </div>
+                <div class="mb-3"> Upload Image</div>
+                <div class="mb-3"><input class="responsive" #selectfile type="file" mat-stroked-button multiple value="select file"
+                            (change)="onFileSelected($event)"></div>
+                <div class="mt-5">
+                    <div class="row">
+                        <mat-grid-list cols="1" rowHeight="1:1">
+                            <mat-grid-tile >
+                                <div *ngIf="livre.livreImages[0]" style="position:relative; max-width: 250px; max-height: 300px;">
+                                    <span *ngIf="livre.livreImages[0].url" class="btn-remove-image" (click)="removeImage()">x</span>
+                                    <img  class="responsive" [src]="livre.livreImages[0].url" >
+                                </div>
+                            </mat-grid-tile>
+                            
+                          </mat-grid-list>
+                    </div>
+                </div>
+            
+            </div>
+            <div class="mb-3">
+                <button type="submit" mat-raised-button color="primary"
+                name="addbook"
+                id="addbook" class="form-control" >Ajouter livre</button>
+            </div>
+        </div>
+        </form>
+        </div>
+    </div>
+</div>

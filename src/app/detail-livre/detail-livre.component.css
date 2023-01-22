@@ -1,0 +1,27 @@
+.title {
+  height: 10px;
+  font-style: bold;
+  font-size: large;
+  margin: 10px;
+  text-align: center;
+}
+.image {
+  margin-left: 20px;
+  align-items: center;
+  height: 500px;
+  width: 400px;
+}
+.value {
+  text-align: center;
+}
+span {
+  margin: 5px;
+  flex-direction: row;
+  text-align: center;
+}
+.button-reserver {
+  margin-top: 50px;
+  margin-left: 50px;
+  justify-content: flex-end;
+  align-items: flex-end;
+}

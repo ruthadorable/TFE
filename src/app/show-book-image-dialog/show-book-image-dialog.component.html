@@ -1,0 +1,8 @@
+<mat-grid-list cols="1" rowHeight="1:1">
+    <mat-grid-tile >
+        <div *ngIf="data" style="height: fit-content; width: fit-content;">
+            <img style="height: 400px; width: 350px; object-fit: contain;" class="responsive" [src]="fileHandle.url" >
+        </div>
+    </mat-grid-tile>
+    
+  </mat-grid-list>

@@ -1,0 +1,22 @@
+<div class="main-container">
+    <div class="row min-heigth-600 no-flex-wrap" >
+        <div class="card col col-md-2 mr-2">
+            <app-menu></app-menu>
+        </div>
+        <div class="card col col-md-10 pl-0 pr-0 background-grey border-none">
+            <div class="col pl-0 pr-0 d-flex flex-column ">
+                <div class="card min-height-80 mb-2" style="margin-top: 10px;">
+                    <app-header></app-header>
+                </div>
+                <div class="card mb-2" style="min-height: 780px;">
+                    <router-outlet></router-outlet>
+                </div>
+                <div class="card min-height-80">
+                    footer
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+</div>

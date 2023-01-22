@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Medkin Library Application </a>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link active" aria-current="page" routerLink="/home" routerLinkActive="active">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" *ngIf="isLoggedIn() && isUser()" routerLink="/user" routerLinkActive="active">Mon Compte</a>
+            </li>
+            
+              <li class="nav-item">
+                <a class="nav-link" *ngIf="!isLoggedIn()" routerLink="/register" routerLinkActive="active">S'inscrire</a>
+              </li>
+            <li class="nav-item active">
+              <a class="nav-link" *ngIf="!isLoggedIn()" routerLink="/login" routerLinkActive="active">Se connecter</a>
+            </li>
+            <li class="nav-item active">
+              <button mat-raised-button color="primary" *ngIf="isLoggedIn()" (click)="logout()" >Se déconnecter</button>
+            </li>
+          </ul>
+
+        
+      </div>
+</nav>

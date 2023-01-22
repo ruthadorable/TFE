@@ -1,0 +1,29 @@
+<div class="container my-container">
+  
+<div class="card justify-content-md-center">
+      <img class="card-img-top" src="assets/Medkin.png" id="icon" alt="Logo" >
+      <div class="card-header"><h3>Se connecter</h3></div>
+      <div class="card-body">
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+          <div class="mb-4">
+            <input type="text"
+            ngModel
+            name="username"
+            id="username"
+            placeholder="Enter your username"
+            class="form-control mb-3"
+            >
+          </div>
+          <div class="mb-4">
+            <input type="password" ngModel required name="password" id="password" class="form-control" placeholder="Password">
+          </div>
+          <div class="mb-4 d-flex justify-content-between" >
+            <button type="submit" class="btn btn-primary"><i class="fas fa-check"> </i> &nbsp;  Se connecter</button>
+            Pas encore inscrit?
+            <button type="button" (click)="register()"   class="btn btn-light">S'inscrire</button>
+          </div>
+        </form>
+      
+    </div>
+  </div>
+</div>

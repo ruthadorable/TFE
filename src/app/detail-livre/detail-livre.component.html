@@ -1,0 +1,25 @@
+
+
+<div class="row">
+        <div class="col-6">
+    <img class="image" [src]="livre.livreImages[0].url">
+        </div><div class="col-6">
+            <div class="row">
+    <div class="col-md-6">
+   <span ><div class="title">Titre: </div><div class="value">{{livre.titre}}</div></span>
+   <span ><div class="title">Resume:</div><div class="value">{{livre.resume}}</div></span>
+   <span ><div class="title">Edition:</div><div class="value">{{livre.edition[0].nom}}</div></span>
+   <span ><div class="title">isbn:</div><div class="value">{{livre.edition[0].isbn}}</div></span>
+    </div>
+   <div class="col-md-6">
+   <span ><div class="title">Date de parution:</div><div class="value">{{livre.edition[0].dateParution}}</div></span>
+   <span ><div class="title">Nom de l'éditeur:</div><div class="value">{{livre.edition[0].editeur.nomEditeur}}</div></span>
+   <span ><div class="title">Langue:</div><div class="value">{{livre.edition[0].langue}}</div></span>
+   <span><div class="title">Auteurs:</div><div class="value">{{livre.auteurs[0].nom}} {{livre.auteurs[0].prenom}} <div *ngIf="livre.auteurs[1]"> {{livre.auteurs[1].nom}} {{livre.auteurs[1].prenom}}</div> </div></span>
+    </div>            
+</div>
+        </div>
+</div>
+<div class="row">
+    <div class="button-reserver"*ngIf="isUser()" ><button (click)="reserver(livre.livre_id)" mat-flat-button color="primary">Réserver un exemplaire</button></div>
+</div>

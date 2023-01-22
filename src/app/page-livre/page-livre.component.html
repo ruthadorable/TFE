@@ -1,0 +1,38 @@
+<div class="col">
+    <div class="row">
+        
+            <h1>Liste des livres</h1>
+
+        
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Couverture</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Description</th>
+                <th scope="col">Editeur</th>
+                <th scope="col">Edition</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let b of livres">
+                <td scope="row"><img style="height: 50px;width:50px;" (click)="showImages(b)" *ngIf="b.livreImages[0]" [src]="b.livreImages[0].url" class="border rounded-circle"></td>
+                <td>{{b.titre}}</td>
+                <td>{{b.auteurs[0].nom}} {{b.auteurs[0].prenom}}</td>
+                <td>{{b.resume}}</td>
+                <td>{{b.edition[0].editeur.nomEditeur}}</td>
+                <td>{{b.edition[0].nom}}</td>
+                <td></td>
+            </tr>
+        </tbody>
+
+    </table>
+    <div class="row">
+        <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+    </div>
+</div>
