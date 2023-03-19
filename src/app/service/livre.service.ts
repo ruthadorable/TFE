@@ -57,7 +57,9 @@ export class LivreService{
   public getLivreById(id:Number): Observable<Livre>{
     return this.http.get<Livre>(`${this.baseUrl}/id`);
   }
- 
+  public getLivreByTitle(titre:string): Observable<Livre[]>{
+    return this.http.get<Livre[]>(`${this.baseUrl}/title/`+titre);
+  }
   public deleteLivre(id:Number):Observable<any>{
     return this.http.delete<Livre>(`${this.deleteLivreUrl}`+id)};
     

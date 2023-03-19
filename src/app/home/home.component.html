@@ -6,7 +6,7 @@
             </div>
         
             <div class="col col-6">
-            <input type="text" class="form-control">
+            <input type="text" placeholder="Rechercher un livre" [(ngModel)]="term" class="form-control">
             </div>
             <div class="col-2"><span class="input-group-text" id="addon-wrapping"><i class="fas fa-search"></i></span></div>
         </div>
@@ -14,9 +14,9 @@
         <div class="row">
             <h1>Liste des livres</h1>
             <mat-grid-list cols="4" rowHeight="1:1">
-                <mat-grid-tile *ngFor="let livre of livres" >
+                <mat-grid-tile *ngFor="let livre of livres | filter :term" >
                         <div style="flex-direction: column;">
-                            <img *ngIf="livre.livreImages[0]" [src]="livre.livreImages[0].url" alt="" style="height:150px; width:100px;">
+                           <!-- <img *ngIf="livre.livreImages[0]" [src]="livre.livreImages[0].url" alt="" style="height:150px; width:100px;">-->
                             <h4>{{livre.titre}} </h4>
                             
                             <button (click)="detailsLivre(livre)" mat-flat-button color="primary">Voir détails</button>

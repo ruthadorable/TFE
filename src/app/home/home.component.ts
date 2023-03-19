@@ -14,6 +14,8 @@ import { LivreService } from '../service/livre.service';
 export class HomeComponent implements OnInit {
 
   livres!:Livre[];
+
+  term!:string;
   
   constructor(private detailsDialog :MatDialog,private livreService:LivreService,private imageProcessingService:ImageProcessingService) { }
 
@@ -37,6 +39,7 @@ export class HomeComponent implements OnInit {
         if(x.livreImages[0]!=undefined)
         x.livreImages[0]=this.imageProcessingService.createImages(x.livreImages[0])
         console.log(x.livreImages[0]);
+        
       })
       this.livres=data;
       

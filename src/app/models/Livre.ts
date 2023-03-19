@@ -10,7 +10,7 @@ import {PrixLitteraire} from "./PrixLitteraire";
 export class Livre{
     public  livre_id!:Number;
 
-    public titre!:String;
+    public titre!:string;
 
     public resume!:String;
     

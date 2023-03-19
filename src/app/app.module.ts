@@ -65,6 +65,7 @@ import { UpdateBookDialogComponent } from './update-book-dialog/update-book-dial
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTreeModule} from '@angular/material/tree';
 import { ReservationComponent } from './reservation/reservation.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -140,7 +141,8 @@ import { ReservationComponent } from './reservation/reservation.component';
     MatTableModule,
     MatDialogModule,
     MatPaginatorModule,
-    MatTreeModule
+    MatTreeModule,
+    Ng2SearchPipeModule
   ],
   providers: [UserService,MatDatepicker],
   bootstrap: [AppComponent]

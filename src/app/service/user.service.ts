@@ -32,10 +32,10 @@ export class UserService{
   }
 
 
-  public login(loginData:NgForm):Observable<any> {
+  public login(user : User):Observable<any> {
     
   
-    return this.httpclient.post(this.PATH_OF_API + '/authenticate', loginData, {
+    return this.httpclient.post(this.PATH_OF_API + '/authenticate', user, {
       headers: this.requestHeader,
     });
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup,NgForm,Validators } from '@angular/forms';
+import { Form, FormBuilder, FormControl, FormGroup,NgForm,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, subscribeOn } from 'rxjs';
 import { User } from '../models/User';
@@ -14,8 +14,7 @@ import { UserService } from '../service/user.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!:FormGroup;
-  email! : string;
-  password!:string;
+  user = new User();
   formloginPreview$!:Observable<User>;
   constructor(
     private router: Router,
@@ -27,14 +26,18 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loginForm=new FormGroup({
+      'user.username': new FormControl(null,Validators.required),
+      'user.password': new FormControl(null,Validators.required),
+    })
 
 
   }
 
 
 
-  login(loginForm: NgForm):void{
-    this.userService.login(loginForm.value)
+  login():void{
+    this.userService.login(this.user)
     .subscribe(
       (response:any)=>{
         this.userAuthService.setRoles(response.user.role);
@@ -55,7 +58,7 @@ export class LoginComponent implements OnInit {
         console.log(error);
       }
     )
-      console.log(loginForm.value);
+      
   }
 
   register() : void{
