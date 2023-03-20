@@ -16,7 +16,7 @@
             <mat-grid-list cols="4" rowHeight="1:1">
                 <mat-grid-tile *ngFor="let livre of livres | filter :term" >
                         <div style="flex-direction: column;">
-                           <!-- <img *ngIf="livre.livreImages[0]" [src]="livre.livreImages[0].url" alt="" style="height:150px; width:100px;">-->
+                            <img *ngIf="livre.livreImages[0]" [src]="livre.livreImages[0].url" alt="" style="height:150px; width:100px;">
                             <h4>{{livre.titre}} </h4>
                             
                             <button (click)="detailsLivre(livre)" mat-flat-button color="primary">Voir détails</button>

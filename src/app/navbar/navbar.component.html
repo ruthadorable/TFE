@@ -6,6 +6,9 @@
               <a class="nav-link active" aria-current="page" routerLink="/home" routerLinkActive="active">Accueil</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" *ngIf="isLoggedIn() && !isUser()" routerLink="/admin" routerLinkActive="active">Dashboard</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" *ngIf="isLoggedIn() && isUser()" routerLink="/user" routerLinkActive="active">Mon Compte</a>
             </li>
             

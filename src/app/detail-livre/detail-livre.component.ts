@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { isUnparsedPrepend } from 'typescript';
+import { HomeComponent } from '../home/home.component';
 import { Livre } from '../models/Livre';
 import { ImageProcessingService } from '../service/image-processing.service';
 import { LivreService } from '../service/livre.service';
@@ -17,7 +18,7 @@ export class DetailLivreComponent implements OnInit {
 
 
   livre!:Livre;
-  constructor(public dialogRef: MatDialogRef<DetailLivreComponent>,
+  constructor(public dialogRef: MatDialogRef<HomeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,private router: Router){}
 
   ngOnInit(): void {
@@ -36,6 +37,9 @@ export class DetailLivreComponent implements OnInit {
 
     return value;
   
+  }
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
   public reserver(id:Number):void{

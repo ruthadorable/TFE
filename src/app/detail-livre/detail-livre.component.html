@@ -2,7 +2,7 @@
 
 <div class="row">
         <div class="col-6">
-    <img class="image" [src]="livre.livreImages[0].url">
+    <img *ngIf="livre.livreImages[0]" class="image" [src]="livre.livreImages[0].url">
         </div><div class="col-6">
             <div class="row">
     <div class="col-md-6">
@@ -20,6 +20,6 @@
 </div>
         </div>
 </div>
-<div class="row">
-    <div class="button-reserver"*ngIf="isUser()" ><button (click)="reserver(livre.livre_id)" mat-flat-button color="primary">Réserver un exemplaire</button></div>
+<div class="row" mat-dialog-actions>
+    <div class="button-reserver"*ngIf="isUser()" ><button (click)="reserver(livre.livre_id)" [mat-dialog-close]="livre" cdkFocusInitial mat-flat-button color="primary">Réserver un exemplaire</button></div>
 </div>

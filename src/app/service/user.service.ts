@@ -12,6 +12,7 @@ import {parse, stringify, toJSON, fromJSON} from 'flatted';
 })
 export class UserService{
     
+
   private userCopy!:User;
   private baseUrl!:string;
   private addUserUrl!: string;
@@ -29,6 +30,8 @@ export class UserService{
     this.updateUserUrl="http://localhost:8080/api/user/update/";
     this.deleteUserUrl="http://localhost:8080/api/user/delete/";
 
+    
+
   }
 
 
@@ -38,6 +41,15 @@ export class UserService{
     return this.httpclient.post(this.PATH_OF_API + '/authenticate', user, {
       headers: this.requestHeader,
     });
+  }
+
+  public getRole(): string {
+  
+    var role = localStorage.getItem('role');
+    if (role == null || role == undefined) {
+      role = '';
+    }
+    return role;
   }
 
 

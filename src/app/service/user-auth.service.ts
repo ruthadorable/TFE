@@ -16,7 +16,7 @@ export class UserAuthService {
   }
 
   public setToken(jwtToken: string){
-    localStorage.setItem('jwtToken',`Bearer ${jwtToken}`);
+    localStorage.setItem('jwtToken',`${jwtToken.slice(7)}`);
   }
 
   public getToken():string|null{

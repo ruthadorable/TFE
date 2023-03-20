@@ -66,6 +66,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTreeModule} from '@angular/material/tree';
 import { ReservationComponent } from './reservation/reservation.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     DragDirective,
     ShowBookImageDialogComponent,
     UpdateBookDialogComponent,
-    ReservationComponent
+    ReservationComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

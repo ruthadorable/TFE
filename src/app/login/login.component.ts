@@ -42,10 +42,12 @@ export class LoginComponent implements OnInit {
       (response:any)=>{
         this.userAuthService.setRoles(response.user.role);
         this.userAuthService.setToken(response.jwtToken);
+        localStorage.setItem("auth_token",response.jwtToken);
         const role= response.user.role[0];
         localStorage.setItem('username',response.user.username);
         localStorage.setItem('prenom',response.user.prenom)
         console.log(localStorage.getItem('username'));
+       
         if(role.roleName=='Admin'){
           localStorage.setItem('role',"Admin")
           this.router.navigate(['/admin']);

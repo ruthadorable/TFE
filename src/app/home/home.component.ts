@@ -38,7 +38,6 @@ export class HomeComponent implements OnInit {
       data.forEach(x=> {
         if(x.livreImages[0]!=undefined)
         x.livreImages[0]=this.imageProcessingService.createImages(x.livreImages[0])
-        console.log(x.livreImages[0]);
         
       })
       this.livres=data;

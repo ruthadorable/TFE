@@ -12,13 +12,13 @@ export class MenuComponent implements OnInit {
     id: '1',
     titre: 'Tableau de bord',
     icon: '',
-    url: 'profile',
+    url: 'admin/profile',
     sousMenu:[
       {
         id:'11',
         titre: 'Profile',
         icon: '',
-        url:''
+        url:'admin/profile'
       }
       ]
     },
@@ -26,31 +26,31 @@ export class MenuComponent implements OnInit {
     id: '2',
     titre: 'Livres',
     icon: 'fa-solid fa-books',
-    url: 'livres',
+    url: 'admin/livres',
     sousMenu:[
       {
         id:'21',
         titre: 'Vue d\'ensemble',
         icon: '',
-        url:'livres'
+        url:'admin/livres'
       },
       {
         id: '22',
         titre: 'Ajouter un livre',
         icon:'',
-        url:'addbook'
+        url:'admin/addbook'
       },
       {
         id: '23',
         titre: 'Modifier un livre',
         icon:'',
-        url:'updatebook'
+        url:'admin/updatebook'
       },
       {
         id: '24',
         titre: 'Supprimer un livre',
         icon:'',
-        url:'deletebook'
+        url:'admin/deletebook'
       },
     ]
   },
@@ -58,19 +58,19 @@ export class MenuComponent implements OnInit {
     id: '3',
     titre: 'Emprunts',
     icon: '',
-    url: 'emprunts',
+    url: 'admin/emprunts',
     sousMenu:[
       {
         id:'31',
         titre: 'Vue d\'ensemble',
         icon: '',
-        url:'emprunts'
+        url:'admin/emprunts'
       },
       {
         id: '22',
         titre: 'Prolonger un emprunt',
         icon:'',
-        url:'ajoutemprunt'
+        url:'admin/ajoutemprunt'
       },
     ]
   },
@@ -78,19 +78,19 @@ export class MenuComponent implements OnInit {
     id: '4',
     titre: 'Reservations',
     icon: '',
-    url: 'reservations',
+    url: 'admin/reservations',
     sousMenu:[
       {
         id:'41',
         titre: 'Vue d\'ensemble',
         icon: '',
-        url:'reservations'
+        url:'admin/reservations'
       },
       {
         id: '42',
         titre: 'Ajouter une réservation',
         icon:'',
-        url:'addreservation'
+        url:'admin/addreservation'
       },
       
     ]
@@ -99,31 +99,31 @@ export class MenuComponent implements OnInit {
     id: '4',
     titre: 'Utilisateurs',
     icon: '',
-    url: 'users',
+    url: 'admin/users',
     sousMenu:[
       {
         id:'21',
         titre: 'Vue d\'ensemble',
         icon: '',
-        url:'users'
+        url:'admin/users'
       },
       {
         id: '22',
         titre: 'Ajouter un utilisateur',
         icon:'',
-        url:'adduser'
+        url:'admin/adduser'
       },
       {
         id: '23',
         titre: 'Modifier un utilisateur',
         icon:'',
-        url:'updateuser'
+        url:'admin/updateuser'
       },
       {
         id: '24',
         titre: 'Supprimer un utilisateur',
         icon:'',
-        url:'deleteuser'
+        url:'admin/deleteuser'
       },
     ]
   },
@@ -131,19 +131,19 @@ export class MenuComponent implements OnInit {
     id: '5',
     titre: 'Messagerie',
     icon: '',
-    url: 'messagerie',
+    url: 'admin/messagerie',
     sousMenu:[
       {
         id:'21',
         titre: 'Boîte email',
         icon: '',
-        url:'messagerie'
+        url:'admin/messagerie'
       },
       {
         id: '22',
         titre: 'Envoyer un message',
         icon:'',
-        url:'newmessage'
+        url:'admin/newmessage'
       }
     ]
   },
@@ -151,31 +151,31 @@ export class MenuComponent implements OnInit {
     id: '6',
     titre: 'Parametrage',
     icon: '',
-    url: 'config',
+    url: 'admin/config',
     sousMenu:[
       {
         id:'21',
         titre: 'Vue d\'ensemble',
         icon: '',
-        url:'config'
+        url:'admin/config'
       },
       {
         id: '22',
         titre: 'Modifier la monnaie',
         icon:'',
-        url:'updatecurrency'
+        url:'admin/updatecurrency'
       },
       {
         id: '23',
         titre: 'Modifier la langue',
         icon:'',
-        url:'updatelang'
+        url:'admin/updatelang'
       },
       {
         id: '24',
         titre: 'Modifier la durée de prêt',
         icon:'',
-        url:'updateduration'
+        url:'admin/updateduration'
       },
     ]
   }];

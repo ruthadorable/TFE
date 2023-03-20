@@ -5,6 +5,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ContactComponent } from './contact/contact.component';
 import { DeletelivreComponent } from './deletelivre/deletelivre.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { HasRoleGuard } from './has-role.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { PageAddLivreComponent } from './page-add-livre/page-add-livre.component';
@@ -28,31 +29,30 @@ import { UserComponent } from './user/user.component';
 const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'admin', component: AdminComponent},
-  {path: 'user', component: UserComponent},
+  {path: '', component: HomeComponent},
+  {path: 'user', component: UserComponent ,canActivate :[HasRoleGuard], data : {role : 'User' }},
   {path: 'forbidden', component: ForbiddenComponent},
   {path: 'about', component: AboutComponent},
   {path: 'contact', component: ContactComponent},
   {path:'register',component:PageInscriptionComponent},
-  {path:'',component:PageDashboardComponent,
-  children:[
-    {path:'livres' , component: PageLivreComponent},
-    {path:'addbook' , component: PageAddLivreComponent},
-    {path:'updatebook' , component: UpdatelivreComponent},
-    {path:'deletebook' , component: DeletelivreComponent},
-    {path:'users', component: UserComponent},
-    {path:'adduser', component: AddUserComponent},
-    {path:'updateuser', component: UpdateUserComponent},
-    {path:'deleteuser', component: DeleteUserComponent},
-    {path:'profile', component: PageProfileComponent},
-    {path:'messagerie', component: PageMessagerieComponent},
-    {path:'emprunts', component: PageEmpruntComponent},
-    {path:'ajoutemprunt', component: ProlongationEmpruntComponent},
-    {path:'reservations', component: PageReservationComponent},
-    {path:'addreservation', component: AddReservationComponent},
-    {path:'config', component: PageParametreComponent}
-  ]
-}
+  {path:'admin',component:PageDashboardComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' },
+   children: [
+    {path:'livres' , component: PageLivreComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' }},
+    {path:'addbook' , component: PageAddLivreComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' }},
+    {path:'updatebook' , component: UpdatelivreComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' }},
+    {path:'deletebook' , component: DeletelivreComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' }},
+    {path:'users', component: UserComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' }},
+    {path:'adduser', component: AddUserComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' }},
+    {path:'updateuser', component: UpdateUserComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' }},
+    {path:'deleteuser', component: DeleteUserComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' }},
+    {path:'profile', component: PageProfileComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' }},
+    {path:'messagerie', component: PageMessagerieComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' }},
+    {path:'emprunts', component: PageEmpruntComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' }},
+    {path:'ajoutemprunt', component: ProlongationEmpruntComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' }},
+    {path:'reservations', component: PageReservationComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' }},
+    {path:'addreservation', component: AddReservationComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' }},
+    {path:'config', component: PageParametreComponent,canActivate :[HasRoleGuard], data : {role : 'Admin' }}
+  ]}
 ];
 
 @NgModule({
