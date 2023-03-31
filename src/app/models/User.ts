@@ -9,14 +9,19 @@
     public email:string;
     public password:string;
     public role!:Role;
-    public constructor()
+
+    public constructor( prenom:string,
+    nom:string,
+    username:string,
+    email:string,
+password:string)
     {
-        this.id=0;
-        this.prenom="";
-        this.nom="";
-        this.username="";
-        this.email="";
-        this.password="";
+        
+        this.prenom=prenom;
+        this.nom=nom;
+        this.username=username;
+        this.email=email;
+        this.password=password;
         
     }
 }

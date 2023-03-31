@@ -73,6 +73,19 @@ export class PageAddLivreComponent implements OnInit {
     this.livre.livreImages.splice(0);
     
   }
+  onFileSelectedExcel(event) {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    this.livreService.addBooksData(formData).subscribe(
+      response => {
+        console.log('File imported successfully');
+      },
+      error => {
+        console.error('Failed to import file');
+      }
+    );
+  }
 
   onFileSelected(event:any):void{
     if(event.target.files){

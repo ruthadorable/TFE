@@ -2,3 +2,9 @@
   margin-top: 200px;
   max-width: 500px;
 }
+input.ng-invalid.ng-touched{
+  border: red 1px solid;
+}
+.error{
+  color: red;
+}

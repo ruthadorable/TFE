@@ -5,43 +5,50 @@
         </div>
        
         <div class="card-body">
-            <form  #registerForm="ngForm"  (ngSubmit)="register()">
+            <form  [formGroup]="registerForm"  (ngSubmit)="register()">
                 
                 <div class="mb-3">
                     <input type="text" 
-                    name="nom" [(ngModel)]="user.nom"
+                    name="nom" formControlName="nom" [(ngModel)]="nom"
                     id="nom" class="form-control" placeholder="Nom">
-                    <div class="invalid-feedback">Le champs nom est requis</div>
+                    
+                    <span class="error" *ngIf="!nom && registerForm.touched">Le nom est requis!</span>
+                    <span class="error" *ngIf=" containsNumbers(nom) && registerForm.touched ">Le nom ne doit pas contenir de chiffres!</span>
                 </div>
                 <div class="mb-3">
-                    <input type="text" [(ngModel)]="user.prenom"
-                    name="prenom" #prenom="ngModel"
+                    <input type="text" formControlName="prenom" [(ngModel)]="prenom"
+                    name="prenom" 
                     id="prenom"class="form-control" placeholder="Prénom">
-                    <div class="invalid-feedback">Le champs prénom est requis</div>
+                    <span class="error" *ngIf="!prenom && registerForm.touched ">Le prénom est requis!</span>
+                    <span class="error" *ngIf=" containsNumbers(prenom) && registerForm.touched ">Le prénom ne doit pas contenir de chiffres!</span>
                 </div>
                 <div class="mb-3">
-                    <input type="text" [(ngModel)]="user.email"
-                    name="email" #email="ngModel"
+                    <input type="text" formControlName="email" [(ngModel)]="email"
+                    name="email" 
                     id="email" class="form-control" placeholder="Email">
-                    <div class="invalid-feedback">L'email est requis</div>
+                    <span class="error" *ngIf="!email && registerForm.touched ">L'email est requis!</span>
+                    <span class="error" *ngIf=" !validEmail(email) && registerForm.touched ">Le format de l'email n'est pas correct!</span>
                 </div>
                 <div class="mb-3">
-                    <input type="text" [(ngModel)]="user.username"
-                    name="username" #username="ngModel"
+                    <input type="text" formControlName="username" [(ngModel)]="username"
+                    name="username" 
                     id="username" class="form-control" placeholder="Username">
-                    <div class="invalid-feedback">Le username est requis</div>
+                    <span class="error" *ngIf="!username && registerForm.touched ">Le pseudo est requis!</span>
+                    
                 </div>
                 <div class="mb-3">
-                    <input type="password" [(ngModel)]="user.password"
-                    name="password" #password="ngModel"
+                    <input type="password" formControlName="password" [(ngModel)]="password"
+                    name="password" 
                     id="password" class="form-control" placeholder="Mot de passe">
-                    <div class="invalid-feedback">Le mot de passe est requis</div>
+                    <span class="error" *ngIf="!password && registerForm.touched ">Le mot de passe est requis!</span>
                 </div>
-                <!--<div class="mb-3">
-                    <input type="password" ngModel
-                    name="password2"
-                    id="password2" class="form-control" placeholder="Confirmer mot de passe">
-                </div>-->
+                <div class="mb-3">
+                    <input type="password" 
+                    name="confirmpassword" formControlName="confirmpassword" [(ngModel)]="confirmpassword"
+                    id="confirmpassword2" class="form-control" placeholder="Confirmer mot de passe">
+                    <mat-hint align="start" *ngIf="password != confirmpassword && confirmpassword"> <strong class="error">Les mots de passe ne concordent pas!</strong></mat-hint>
+
+                </div>
                 <div class="mb-3 d-flex justify-content-between" >
                     <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> &nbsp; S'inscrire</button>
                         Déjà inscrit?

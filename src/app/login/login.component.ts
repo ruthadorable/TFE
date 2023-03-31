@@ -14,8 +14,10 @@ import { UserService } from '../service/user.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!:FormGroup;
-  user = new User();
+  user!:User;
   formloginPreview$!:Observable<User>;
+  username!:string;
+  password!:string;
   constructor(
     private router: Router,
     private userService: UserService,
@@ -27,8 +29,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm=new FormGroup({
-      'user.username': new FormControl(null,Validators.required),
-      'user.password': new FormControl(null,Validators.required),
+      'username': new FormControl(null,Validators.required),
+      'password': new FormControl(null,Validators.required),
     })
 
 
@@ -37,6 +39,8 @@ export class LoginComponent implements OnInit {
 
 
   login():void{
+    if(!this.loginForm.valid)
+    {this.user=new User('','',this.loginForm.get('username').value,'',this.loginForm.get('password').value);
     this.userService.login(this.user)
     .subscribe(
       (response:any)=>{
@@ -60,7 +64,9 @@ export class LoginComponent implements OnInit {
         console.log(error);
       }
     )
-      
+  }else{
+    alert("Identifiants not valables!")
+  }
   }
 
   register() : void{

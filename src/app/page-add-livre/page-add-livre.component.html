@@ -4,7 +4,7 @@
             <br>
             <h2>Ajouter un livre</h2>
         </div>
-       
+        <input type="file" (change)="onFileSelectedExcel($event)">
         <div class="card-body">
             <form  #bookForm="ngForm"  (ngSubmit)="addBook(bookForm)" enctype="multipart/form-data">
             <div class="row">

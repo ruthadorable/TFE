@@ -9,10 +9,11 @@ import * as flatten from 'flat';
   providedIn: 'root'
 })
 export class LivreService{
+  
   getResources(arg0: string) {
     throw new Error('Method not implemented.');
   }
-    
+  private importExcelUrl: string;  
   private livreCopy!:Livre;
   private baseUrl!:string;
   private addLivreUrl!: string;
@@ -30,6 +31,7 @@ export class LivreService{
     this.getLivreUrl="http://localhost:8080/api/livre/all";
     this.updateLivreUrl="http://localhost:8080/api/livre/update/";
     this.deleteLivreUrl="http://localhost:8080/api/livre/delete/";
+    this.importExcelUrl="http://localhost:8080/api/livre/import-excel"
 
   }
   public setData(livre :Livre)
@@ -49,6 +51,9 @@ export class LivreService{
 
   public addLivre(livre: FormData): Observable<Livre> {
     return this.http.post<Livre>(`${this.addLivreUrl}`,livre);
+  }
+  public addBooksData(livres : FormData): Observable<any>{
+    return this.http.post(this.importExcelUrl, livres);
   }
 
   public updateLivre(id :Number,livre: FormData): Observable<Livre>{
