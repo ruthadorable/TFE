@@ -1,5 +1,6 @@
 package com.medkin.bib.controller;
 
+import com.medkin.bib.entity.User;
 import com.medkin.bib.service.JwtService;
 import com.medkin.bib.entity.JwtRequest;
 import com.medkin.bib.entity.JwtResponse;
@@ -17,7 +18,7 @@ public class JwtController {
     private JwtService jwtService;
 
     @PostMapping({"/authenticate"})
-    public JwtResponse createJwtToken(@RequestBody JwtRequest jwtRequest) throws Exception {
-        return jwtService.createJwtToken(jwtRequest);
+    public JwtResponse createJwtToken(@RequestBody User user) throws Exception {
+        return jwtService.createJwtToken(user);
     }
 }

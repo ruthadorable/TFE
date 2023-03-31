@@ -8,13 +8,15 @@
         <version>2.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.youtube</groupId>
-    <artifactId>jwt</artifactId>
+    <groupId>medkin.app</groupId>
+    <artifactId>medkin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>jwt-youtube</name>
-    <description>Demo project to understand JWT token + role based authentication</description>
+    <name>Medkin</name>
+    <description>Application for a medical library project in Kinshasa</description>
     <properties>
         <java.version>1.8</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
     <dependencies>
         <dependency>
@@ -53,6 +55,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+
 
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

@@ -115,6 +115,24 @@ public class LivreController {
         ResponseEntity<Livre> ok = ResponseEntity.ok(updatedLivre);
         return ok;
     }
+    @PostMapping("/import-excel")
+    public ResponseEntity<Void> importExcel(@RequestParam("file") MultipartFile file) throws IOException {
+        // Read the Excel file data
+        Workbook workbook = WorkbookFactory.create(file.getInputStream());
+        Sheet sheet = workbook.getSheetAt(0);
+
+        // Iterate over the rows and insert data into the database
+        for (Row row : sheet) {
+            String name = row.getCell(0).getStringCellValue();
+            int age = (int) row.getCell(1).getNumericCellValue();
+
+            // Insert data into the database using JPA
+            Person person = new Person(name, age);
+            personRepository.save(person);
+        }
+
+        return ResponseEntity.ok().build();
+    }
 
 
     @DeleteMapping("/delete/{id}")

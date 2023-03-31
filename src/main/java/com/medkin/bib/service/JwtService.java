@@ -31,13 +31,13 @@ public class JwtService implements UserDetailsService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public JwtResponse createJwtToken(JwtRequest jwtRequest) throws Exception {
-        String userName = jwtRequest.getUsername();
-        String userPassword = jwtRequest.getPassword();
+    public JwtResponse createJwtToken(User utilisateur) throws Exception {
+        String userName = utilisateur.getUsername();
+        String userPassword = utilisateur.getPassword();
         authenticate(userName, userPassword);
 
         UserDetails userDetails = loadUserByUsername(userName);
-        String newGeneratedToken = jwtUtil.generateToken(userDetails);
+        String newGeneratedToken = "Bearer "+ jwtUtil.generateToken(userDetails);
 
         User user = userDao.findById(userName).get();
         return new JwtResponse(user, newGeneratedToken);
