@@ -3,12 +3,13 @@ package com.medkin.bib.controller;
 import com.medkin.bib.Exception.ResourceNotFoundException;
 import com.medkin.bib.dao.AuteurDao;
 import com.medkin.bib.dao.EditionDao;
-import com.medkin.bib.entity.Auteur;
-import com.medkin.bib.entity.Edition;
-import com.medkin.bib.entity.ImageModel;
-import com.medkin.bib.entity.Livre;
+import com.medkin.bib.entity.*;
 import com.medkin.bib.service.LivreService;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -116,22 +119,76 @@ public class LivreController {
         return ok;
     }
     @PostMapping("/import-excel")
-    public ResponseEntity<Void> importExcel(@RequestParam("file") MultipartFile file) throws IOException {
-        // Read the Excel file data
-        Workbook workbook = WorkbookFactory.create(file.getInputStream());
-        Sheet sheet = workbook.getSheetAt(0);
+    public ResponseEntity<String> uploadExcelFile(MultipartFile file) {
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
+            XSSFSheet worksheet = workbook.getSheetAt(0);
+            for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
+                Row row = worksheet.getRow(i);
+                Livre excelData = new Livre();
+                Edition edition= new Edition();
+                for (int j = 0; j < row.getLastCellNum(); j++) {
+                    Cell cell = row.getCell(j);
+                    if (j == 1) {
+                        excelData.setTitre(cell.getStringCellValue());
+                    } else if (j == 2) {
+                        excelData.setResume(cell.getStringCellValue());
+                    } else if (j == 3) {
+                        String auteurs[]= cell.getStringCellValue().split("[,]",0 );
+                        List <Auteur> auteurList=new ArrayList<Auteur>();
+                        for(String name: auteurs)
+                        { Auteur auteur = new Auteur();
+                            auteur.setNom(name.split("[ ]",0)[0]);
+                            auteur.setPrenom(name.split("[ ]",0)[1]);
+                            auteurList.add(auteur);
+                        }
+                        excelData.setAuteurs( auteurList);
+                    }
+                    else if (j == 4) {
+                        Editeur editeur= new Editeur();
+                        editeur.setNomEditeur(cell.getStringCellValue());
+                        edition.setEditeur(editeur);
 
-        // Iterate over the rows and insert data into the database
-        for (Row row : sheet) {
-            String name = row.getCell(0).getStringCellValue();
-            int age = (int) row.getCell(1).getNumericCellValue();
+                    }
+                    else if (j == 5) {
+                        edition.setNom(cell.getStringCellValue());
 
-            // Insert data into the database using JPA
-            Person person = new Person(name, age);
-            personRepository.save(person);
+                    }
+                    else if (j == 6){
+                        String date = cell.getStringCellValue();
+                        DateTimeFormatter dt = DateTimeFormatter.ofPattern( "uuuu-MM-dd");
+                        System.out.println("<" + LocalDate.parse(date).format(dt) + ">");
+                        edition.setDateParution(LocalDate.parse(date));
+
+                    }
+                    else if (j == 7 ){
+                        String langue=cell.getStringCellValue();
+                        edition.setLangue(langue);
+                    }
+                    else if (j == 8 ){
+                        int isbn= (int) cell.getNumericCellValue();
+                        edition.setIsbn(isbn);
+                    }
+                    else if (j == 9 ){
+                        String nomCategorie=cell.getStringCellValue();
+                        Categorie categorie=new Categorie();
+                        categorie.setNomCategorie(nomCategorie);
+                        Set <Livre> livreSet=new HashSet<>();
+                        livreSet.add(excelData);
+                        categorie.setLivres(livreSet);
+                        excelData.setCategorie(categorie);
+                    }
+                    List<Edition>editions=new ArrayList<>();
+                    editions.add(edition);
+                    excelData.setEdition(editions);
+                }
+                livreService.addNewLivre(excelData); // save data to database
+            }
+            return new ResponseEntity<>("Excel data imported successfully", HttpStatus.OK);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Failed to import Excel data", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        return ResponseEntity.ok().build();
     }
 
 

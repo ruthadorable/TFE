@@ -72,6 +72,17 @@ public class Livre implements Serializable {
     )
     private MotCle motCle;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "LIVRE_CATEGORIE",
+            joinColumns = {
+                    @JoinColumn(name = "LIVRE_ID")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "CATEGORIE_ID")
+            }
+    )
+    private Categorie categorie;
+
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "LIVRE_PRIXLITTERAIRE",

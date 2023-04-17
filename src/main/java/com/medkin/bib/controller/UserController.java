@@ -1,5 +1,7 @@
 package com.medkin.bib.controller;
 
+import com.medkin.bib.entity.JwtResponse;
+import com.medkin.bib.service.JwtService;
 import com.medkin.bib.service.UserService;
 import com.medkin.bib.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JwtService jwtService;
+
+    @PostMapping({"/authenticate"})
+    public JwtResponse createJwtToken(@RequestBody User user) throws Exception {
+        return jwtService.createJwtToken(user);
+    }
     @PostConstruct
     public void initRoleAndUser() {
         userService.initRoleAndUser();
