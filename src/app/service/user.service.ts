@@ -21,7 +21,10 @@ export class UserService{
   private deleteUserUrl!:string;
   private PATH_OF_API = 'http://localhost:8080';
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
-  
+  headers = new HttpHeaders()
+  .set('Content-Type', 'application/json')
+  .set('X-API-TOKEN', localStorage.getItem('auth_token'));
+
   constructor(private httpclient: HttpClient,private userAuthService: UserAuthService) 
   {    
     this.baseUrl="http://localhost:8080/api/user";
@@ -36,9 +39,8 @@ export class UserService{
 
 
   public login(user : User):Observable<any> {
-    return this.httpclient.post(this.PATH_OF_API + '/authenticate', user, {
-      headers: this.requestHeader,
-    });
+    console.log(user);
+    return this.httpclient.post(this.PATH_OF_API + '/authenticate', user, {headers: this.headers});
   }
 
   public getRole(): string {

@@ -4,7 +4,17 @@
             <br>
             <h2>Ajouter un livre</h2>
         </div>
-        <input type="file" (change)="onFileSelectedExcel($event)">
+        <br>
+        
+            
+                
+                <div class="col-md-12 bg-light">
+                    <input type="file" (change)="onFileSelectedExcel($event)">
+                    <button type="button" class="btn btn-danger float-right" (click)="onImportClick()"><i class="bi bi-plus-circle"></i>Importer un fichier excel </button>
+                </div>
+            
+            <h1>------ ou ------</h1>
+        
         <div class="card-body">
             <form  #bookForm="ngForm"  (ngSubmit)="addBook(bookForm)" enctype="multipart/form-data">
             <div class="row">

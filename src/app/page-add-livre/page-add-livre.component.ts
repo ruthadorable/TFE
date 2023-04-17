@@ -12,7 +12,8 @@ import { LivreService } from '../service/livre.service';
 import {flatten} from 'flat';
 import { FileHandle } from '../models/FileHandle';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { MatDialog } from '@angular/material/dialog';
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-page-add-livre',
   templateUrl: './page-add-livre.component.html',
@@ -25,10 +26,10 @@ export class PageAddLivreComponent implements OnInit {
   auteur2=new Auteur();
   edition=new Edition();
   editeur=new Editeur();
-
-  
+  formData = new FormData();
+  file!:any;
   bookForm!:FormGroup;
-  constructor(private sanitizer:DomSanitizer, private router :Router, private livreService:LivreService) { }
+  constructor(private sanitizer:DomSanitizer, private router :Router, private livreService:LivreService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.livre.edition[0].editeur=this.editeur;
@@ -74,12 +75,30 @@ export class PageAddLivreComponent implements OnInit {
     
   }
   onFileSelectedExcel(event) {
-    const file = event.target.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    this.livreService.addBooksData(formData).subscribe(
+    let workBook = null;
+    let jsonData = null;
+    const reader = new FileReader();
+    this.file = event.target.files[0];
+    reader.onload = (event) => {
+      const data = reader.result;
+      workBook = XLSX.read(data, { type: 'binary' });
+      jsonData = workBook.SheetNames.reduce((initial, name) => {
+        const sheet = workBook.Sheets[name];
+        initial[name] = XLSX.utils.sheet_to_json(sheet);
+        return initial;
+      }, {});
+      console.log(jsonData); // this is your Excel data
+    };
+    reader.readAsBinaryString(this.file);
+  }
+
+
+  
+  onImportClick(){
+    this.formData.append('file', this.file);
+    this.livreService.addBooksData(this.formData).subscribe(
       response => {
-        console.log('File imported successfully');
+        alert('File imported successfully');
       },
       error => {
         console.error('Failed to import file');
